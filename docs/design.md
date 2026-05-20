@@ -48,17 +48,17 @@ Local state (`useState`):
 
 Global state (Context API):
 - `Top5Context` will hold:
-  - `lists` → all current Top 5 lists.
-  - `addList` → create a new list.
-  - `deleteList` → remove a list.
-  - `updateList` → update an existing list.
+    - `lists` → all current Top 5 lists.
+    - `addList` → create a new list.
+    - `deleteList` → remove a list.
+    - `updateList` → update an existing list.
 
 Server state (API source of truth):
 - Lists are fetched from the API.
 - Response state uses a pattern such as:
-  - `loading`
-  - `error`
-  - `data`
+    - `loading` → request in progress
+    - `success` → data received
+    - `error` → request failed
 
 ## 4. Backend / API Design (Express)
 
@@ -111,19 +111,46 @@ Top 5 lists
 - `DELETE /lists/:id`
   - Deletes a list.
 
+### Error Handling Strategy
+
+The API uses standard HTTP status codes:
+
+- 400 → Bad Request (validation errors)
+- 404 → Not Found
+- 500 → Internal Server Error
+
+All error responses follow a consistent format:
+
+```json
+{
+  "success": false,
+  "error": "Descriptive error message"
+}
+```
+
+
 ## 5. Data Persistence
 
 Persisted on the backend:
 - Top 5 lists.
 - Category.
 - Title.
-- Items (maximum 5).
+- Items (exactly 5).
 - Creation date.
 
 Client-only state:
 - Form state for create/edit processes.
 - UI state such as open modals and temporary inputs.
 - Local filters and view-only settings.
+
+### Data Persistence Strategy
+
+The backend initially uses in-memory or JSON file storage.
+
+This approach simplifies development and avoids database complexity.
+
+The architecture is designed to support future migration to a database
+(e.g. MongoDB or PostgreSQL) without affecting the frontend or API contracts.
 
 ## 6. Data Flow (Frontend ↔ API ↔ Backend)
 
@@ -143,6 +170,8 @@ Response JSON
   ↑
 Frontend updates state (`Context` / hooks)
 
+The frontend updates UI state based on API responses and synchronizes local state accordingly.
+
 ## 7. Backend Architecture (Layers)
 
 `server/`
@@ -157,6 +186,9 @@ Frontend updates state (`Context` / hooks)
     - `list.model.ts`
   - `config/`
   - `app.ts`
+
+The backend is structured to ensure separation of concerns and scalability across all layers.
+
 
 ## 8. Typed API Client (Frontend)
 
@@ -176,6 +208,17 @@ export interface Top5List {
 }
 ```
 
+### Shared Type Strategy
+
+The application uses a shared TypeScript contract between frontend and backend.
+
+- Ensures API responses match frontend expectations
+- Prevents type mismatches
+- Improves maintainability and safety
+
+Future improvement:
+Move shared types to a common folder (e.g. /shared).
+
 ## 9. Architecture Decisions
 
 - Use layered backend architecture to separate responsibilities.
@@ -185,6 +228,25 @@ export interface Top5List {
 - Use TypeScript end-to-end for type safety.
 - Keep the backend design ready for a future database migration.
 
+### Backend Validation
+
+The backend enforces strict validation rules to maintain data integrity:
+
+- title is required and must be a non-empty string
+- category is required and must be a valid string
+- items must be an array of strings
+- Each list must contain exactly 5 items (Top 5 constraint)
+
+### Single Source of Truth Principle
+
+The API is the single source of truth for all application data.
+
+- The frontend does not store permanent data
+- All CRUD operations go through the backend
+- Client state is derived from API responses
+
+This prevents data inconsistencies between client and server.
+
 ## 10. Summary
 
 The Top 5 application is built around:
@@ -192,4 +254,4 @@ The Top 5 application is built around:
 - Layered backend design (routes → controllers → services).
 - Clear, typed REST API.
 - Hybrid state management (local + global + server).
-- Unidirectional data flow from frontend through API to backend.
+- The architecture ensures scalability, maintainability, and a clear separation between frontend and backend concerns.
