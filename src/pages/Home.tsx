@@ -19,18 +19,17 @@ export default function Home() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2 tracking-tight text-stone-900">All lists</h1>
-        <p className="text-stone-500">Rank anything. Five slots. No compromises.</p>
+        <h1 className="text-4xl font-bold mb-2 tracking-tight text-stone-900 dark:text-stone-100">All lists</h1>
+        <p className="text-stone-500 dark:text-stone-400">Rank anything. Five slots. No compromises.</p>
       </div>
 
-      {/* Filtro por categoría */}
       <div className="flex gap-2 flex-wrap mb-8">
         <button
           onClick={() => setActiveCategory('all')}
           className={`text-sm px-4 py-1.5 rounded-full border transition-colors ${
             activeCategory === 'all'
-              ? 'bg-stone-900 text-white border-stone-900'
-              : 'bg-white text-stone-600 border-stone-200 hover:border-stone-400'
+              ? 'bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 border-stone-900 dark:border-stone-100'
+              : 'bg-white dark:bg-stone-900 text-stone-600 dark:text-stone-400 border-stone-200 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-500'
           }`}
         >
           All
@@ -41,8 +40,8 @@ export default function Home() {
             onClick={() => setActiveCategory(cat.value)}
             className={`text-sm px-4 py-1.5 rounded-full border transition-colors ${
               activeCategory === cat.value
-                ? 'bg-stone-900 text-white border-stone-900'
-                : 'bg-white text-stone-600 border-stone-200 hover:border-stone-400'
+                ? 'bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 border-stone-900 dark:border-stone-100'
+                : 'bg-white dark:bg-stone-900 text-stone-600 dark:text-stone-400 border-stone-200 dark:border-stone-700 hover:border-stone-400 dark:hover:border-stone-500'
             }`}
           >
             {cat.emoji} {cat.label}
@@ -53,7 +52,7 @@ export default function Home() {
       {loading && <LoadingSpinner message="Fetching your lists…" />}
 
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-700">
+        <div className="bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-xl p-4 text-sm text-red-700 dark:text-red-400">
           {error} —{' '}
           <button onClick={fetchLists} className="underline font-medium">Retry</button>
         </div>
