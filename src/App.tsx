@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import NewList from './pages/NewList'
 import ListDetail from './pages/ListDetail'
 import NotFound from './pages/NotFound'
+import EditList from './pages/EditList'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/new" element={<NewList />} />
               <Route path="/list/:id" element={<ListDetail />} />
+              <Route path="/list/:id/edit" element={<EditList />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
