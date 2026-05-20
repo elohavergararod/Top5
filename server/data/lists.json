@@ -1,0 +1,41 @@
+[
+  {
+    "id": "08abd525-bf95-48da-9272-277bead1b70e",
+    "title": "Best food",
+    "category": "food",
+    "items": [
+      {
+        "id": "7c09cf8c-c5fe-4653-81ec-71976ace7585",
+        "rank": 1,
+        "name": "Sushi",
+        "description": "aadw"
+      },
+      {
+        "id": "db5b92b5-1920-456d-98d1-32f9ccae0e00",
+        "rank": 2,
+        "name": "Hamburguer",
+        "description": "casfd"
+      },
+      {
+        "id": "2a46fb6b-efdf-4fb1-b3ff-97fc1b37f587",
+        "rank": 3,
+        "name": "Salad",
+        "description": ">cdffw"
+      },
+      {
+        "id": "e6c96269-2ce0-41c8-9869-0f56043065f4",
+        "rank": 4,
+        "name": "Barbacue",
+        "description": "<cdsef"
+      },
+      {
+        "id": "e899c4f0-81ee-424b-9e7f-dd6eadf6c394",
+        "rank": 5,
+        "name": "Pizza",
+        "description": "wedfwef"
+      }
+    ],
+    "createdAt": "2026-05-20T03:04:57.537Z",
+    "updatedAt": "2026-05-20T03:04:57.537Z"
+  }
+]
