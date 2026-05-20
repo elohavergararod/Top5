@@ -33,3 +33,8 @@ export interface ListFormData {
   category: Category
   items: { name: string; description: string }[]
 }
+
+export interface ApiResponse<T> {
+  data: T
+  message?: string
+}
