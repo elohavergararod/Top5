@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { ThemeProvider } from './context/ThemeContext'
 import { ListsProvider } from './context/ListsContext'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
@@ -10,20 +11,22 @@ import EditList from './pages/EditList'
 function App() {
   return (
     <BrowserRouter>
-      <ListsProvider>
-        <div className="min-h-screen flex flex-col bg-stone-50">
-          <Navbar />
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/new" element={<NewList />} />
-              <Route path="/list/:id" element={<ListDetail />} />
-              <Route path="/list/:id/edit" element={<EditList />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-        </div>
-      </ListsProvider>
+      <ThemeProvider>
+        <ListsProvider>
+          <div className="min-h-screen flex flex-col bg-stone-50">
+            <Navbar />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/new" element={<NewList />} />
+                <Route path="/list/:id" element={<ListDetail />} />
+                <Route path="/list/:id/edit" element={<EditList />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+          </div>
+        </ListsProvider>
+      </ThemeProvider>
     </BrowserRouter>
   )
 }
