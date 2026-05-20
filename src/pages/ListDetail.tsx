@@ -71,11 +71,17 @@ export default function ListDetail() {
       </div>
 
       <div className="flex gap-3 pt-4 border-t border-stone-100">
-        <button
-          onClick={() => setShowModal(true)}
-          className="text-sm px-4 py-2 border border-red-200 text-red-500 rounded-full hover:bg-red-50 transition-colors"
+        <Link
+            to={`/list/${list.id}/edit`}
+            className="text-sm px-4 py-2 border border-stone-200 rounded-full hover:border-stone-400 transition-colors"
         >
-          Delete list
+            Edit list
+        </Link>
+        <button
+            onClick={() => setShowModal(true)}
+            className="text-sm px-4 py-2 border border-red-200 text-red-500 rounded-full hover:bg-red-50 transition-colors"
+        >
+            Delete list
         </button>
       </div>
 
