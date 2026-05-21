@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <ThemeProvider>
         <ListsProvider>
-          <div className="min-h-screen flex flex-col bg-stone-50">
+          <div className="min-h-screen flex flex-col bg-stone-50 dark:bg-stone-950">
             <Navbar />
             <main className="flex-1">
               <Routes>
