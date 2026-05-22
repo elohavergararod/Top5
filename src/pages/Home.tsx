@@ -62,7 +62,9 @@ export default function Home() {
 
       {!loading && !error && filtered.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map(list => <ListCard key={list.id} list={list} />)}
+          {filtered.map((list, index) => (
+            <ListCard key={list.id} list={list} index={index} />
+          ))}
         </div>
       )}
     </div>

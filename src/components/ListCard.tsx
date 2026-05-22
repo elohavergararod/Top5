@@ -4,13 +4,17 @@ import { getCategoryEmoji, formatDate, truncate } from '../utils'
 
 interface Props {
   list: TopList
+  index?: number
 }
 
-export default function ListCard({ list }: Props) {
+export default function ListCard({ list, index = 0 }: Props) {
+  const delay = Math.min(index * 100, 500)
+
   return (
     <Link
       to={`/list/${list.id}`}
       className="group block bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl p-5 hover:border-stone-400 dark:hover:border-stone-500 hover:shadow-sm transition-all duration-200"
+      style={{ animationDelay: `${delay}ms` }}
     >
       <div className="flex items-start justify-between gap-3 mb-3">
         <span className="text-2xl">{getCategoryEmoji(list.category)}</span>
