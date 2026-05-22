@@ -12,16 +12,22 @@ const RANK_STYLES: Record<number, string> = {
 
 export default function RankItem({ item }: Props) {
   const rankStyle = RANK_STYLES[item.rank] ?? 'bg-white dark:bg-stone-900 border-stone-100 dark:border-stone-800 text-stone-400 dark:text-stone-800'
+  const delay = (item.rank - 1) * 80
 
   return (
-    <div className="flex items-start gap-4 p-4 bg-white dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded-xl">
+    <div
+      className="flex items-start gap-4 p-4 bg-white dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded-xl animate-fade-in-up"
+      style={{ animationDelay: `${delay}ms` }}
+    >
       <div className={`shrink-0 w-9 h-9 rounded-full border flex items-center justify-center font-bold text-sm ${rankStyle}`}>
         {item.rank}
       </div>
       <div className="flex-1 min-w-0">
         <p className="font-medium text-stone-900 dark:text-stone-100 leading-snug">{item.name}</p>
         {item.description && (
-          <p className="text-sm text-stone-500 dark:text-stone-400 mt-0.5 leading-relaxed">{item.description}</p>
+          <p className="text-sm text-stone-500 dark:text-stone-400 mt-0.5 leading-relaxed">
+            {item.description}
+          </p>
         )}
       </div>
     </div>
