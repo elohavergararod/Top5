@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useLocalStorage } from './useLocalStorage'
 
 export function useDarkMode() {
-  const [isDark, setIsDark] = useState(() => {
-    const stored = localStorage.getItem('darkMode')
-    if (stored !== null) return stored === 'true'
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-  })
+  const [isDark, setIsDark] = useLocalStorage<boolean>(
+    'darkMode',
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  )
 
   useEffect(() => {
     const root = document.documentElement
@@ -14,7 +14,6 @@ export function useDarkMode() {
     } else {
       root.classList.remove('dark')
     }
-    localStorage.setItem('darkMode', String(isDark))
   }, [isDark])
 
   const toggle = () => setIsDark(prev => !prev)
