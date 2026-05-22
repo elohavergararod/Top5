@@ -1,12 +1,15 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
 import { ListsProvider } from './context/ListsContext'
 import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import NewList from './pages/NewList'
-import ListDetail from './pages/ListDetail'
-import NotFound from './pages/NotFound'
-import EditList from './pages/EditList'
+import LoadingSpinner from './components/LoadingSpinner'
+
+const Home = lazy(() => import('./pages/Home'))
+const NewList = lazy(() => import('./pages/NewList'))
+const ListDetail = lazy(() => import('./pages/ListDetail'))
+const EditList = lazy(() => import('./pages/EditList'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 function App() {
   return (
@@ -16,13 +19,15 @@ function App() {
           <div className="min-h-screen flex flex-col bg-stone-50 dark:bg-stone-950">
             <Navbar />
             <main className="flex-1">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/new" element={<NewList />} />
-                <Route path="/list/:id" element={<ListDetail />} />
-                <Route path="/list/:id/edit" element={<EditList />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <Suspense fallback={<LoadingSpinner message="Loading page…" />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/new" element={<NewList />} />
+                  <Route path="/list/:id" element={<ListDetail />} />
+                  <Route path="/list/:id/edit" element={<EditList />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
             </main>
           </div>
         </ListsProvider>
