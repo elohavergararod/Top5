@@ -59,7 +59,7 @@ A full-stack application for creating, managing, and sharing personal Top 5 list
 ---
 
 ## Project Structure
-
+```
 Top5/
 ├── api/
 │   ├── index.ts              # Vercel serverless function (Express)
@@ -83,7 +83,7 @@ Top5/
 ├── vercel.json             # Deployment configuration
 ├── .env.development        # Local environment variables
 └── .env.production         # Production environment variables
-
+```
 ---
 
 ## Install and Run
